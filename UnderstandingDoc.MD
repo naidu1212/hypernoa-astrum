@@ -40,3 +40,4 @@ You're ready to record. Here's your 60-second script:
 [0:40-0:55] Show policy comparison: Display policy_comparison.png. "Our trained agent matches the best heuristic baseline at 24.7, crushing random at 14.6. We trained with TRL GRPO on Qwen2.5 and got 25.1 average reward."
 
 [0:55-1:00] Close: "Hypernoa Astrum — the first environment that trains AI to reason, adapt, and align. Built on OpenEnv 0.2.1."
+
