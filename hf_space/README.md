@@ -39,13 +39,13 @@ curl -X POST https://YOUR-SPACE.hf.space/step \
 ## Install as client
 
 ```bash
-pip install git+https://huggingface.co/spaces/naidu1212/hypernoa-astrum
+pip install git+https://huggingface.co/spaces/ABNaidu/hypernoa-astrum
 ```
 
 ```python
 from astrum_env import AstrumEnv, AstrumAction
 
-with AstrumEnv(base_url="https://naidu1212-hypernoa-astrum.hf.space").sync() as env:
+with AstrumEnv(base_url="https://abnaidu-hypernoa-astrum.hf.space").sync() as env:
     result = env.reset()
     result = env.step(AstrumAction(
         action_type="allocate_resources",

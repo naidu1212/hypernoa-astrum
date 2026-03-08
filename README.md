@@ -8,7 +8,7 @@ Today's AI is trained to complete tasks. Tomorrow's AI must learn to **reason un
 
 Built on [OpenEnv 0.2.1](https://github.com/meta-pytorch/OpenEnv) | [OpenEnv Hackathon SF](https://cerebralvalley.ai/e/openenv-hackathon-sf)
 
-**Live Demo**: [HF Space](https://huggingface.co/spaces/naidu1212/hypernoa-astrum) | **Repo**: [GitHub](https://github.com/naidu1212/hypernoa-astrum)
+**Live Demo**: [HF Space](https://huggingface.co/spaces/ABNaidu/hypernoa-astrum) | **Repo**: [GitHub](https://github.com/naidu1212/hypernoa-astrum)
 
 ---
 
@@ -140,12 +140,12 @@ python run_astrum_local.py
 
 ```bash
 # Install the environment from HF Space
-pip install git+https://huggingface.co/spaces/naidu1212/hypernoa-astrum
+pip install git+https://huggingface.co/spaces/ABNaidu/hypernoa-astrum
 
 # Use as a client
 python -c "
 from astrum_env import AstrumEnv, AstrumAction
-with AstrumEnv(base_url='https://naidu1212-hypernoa-astrum.hf.space').sync() as env:
+with AstrumEnv(base_url='https://abnaidu-hypernoa-astrum.hf.space').sync() as env:
     result = env.reset()
     result = env.step(AstrumAction(action_type='allocate_resources', params={'stakeholder': 'workers', 'amount': 10, 'resource': 'budget'}))
     print(f'Reward: {result.reward}')
