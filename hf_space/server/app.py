@@ -15,6 +15,7 @@ from typing import Optional
 from models import AstrumAction, AstrumObservation
 from server.astrum_environment import AstrumEnvironment
 
+_use_openenv = False
 try:
     from openenv.core.env_server.http_server import create_app
     app = create_app(
@@ -23,6 +24,7 @@ try:
         AstrumObservation,
         env_name="hypernoa_astrum",
     )
+    _use_openenv = True
 except Exception:
     app = FastAPI(
         title="Hypernoa Astrum",
@@ -47,19 +49,6 @@ except Exception:
     def health():
         return {"status": "healthy", "env": "hypernoa_astrum", "version": "0.1.0"}
 
-    @app.get("/")
-    def root():
-        return {
-            "env": "hypernoa_astrum",
-            "version": "0.1.0",
-            "description": "Adaptive environment for aligned intelligence",
-            "endpoints": {
-                "GET /health": "Health check",
-                "POST /reset": "Reset environment",
-                "POST /step": "Take an action",
-            },
-        }
-
     @app.post("/reset")
     def reset(req: ResetRequest | None = None):
         seed = req.seed if req else None
@@ -71,6 +60,22 @@ except Exception:
     def step(action: AstrumAction):
         obs = _env.step(action)
         return obs.model_dump()
+
+
+@app.get("/")
+def root_info():
+    return {
+        "env": "hypernoa_astrum",
+        "version": "0.1.0",
+        "openenv": _use_openenv,
+        "description": "Adaptive environment for training aligned intelligence",
+        "endpoints": {
+            "GET /": "This page",
+            "GET /health": "Health check",
+            "POST /reset": "Reset environment (optional: seed, episode_id)",
+            "POST /step": "Take an action (action_type + params)",
+        },
+    }
 
 
 def main():
