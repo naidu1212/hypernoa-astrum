@@ -41,3 +41,6 @@ htmlcov/
 *.png
 *.jpg
 *.jpeg
+
+# Training results (can be large)
+results/

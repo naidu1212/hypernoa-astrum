@@ -217,7 +217,8 @@ def main():
                 "**Built for**: OpenEnv Hackathon SF"
             )
 
-    demo.launch()
+    port = int(os.environ.get("GRADIO_SERVER_PORT", 7860))
+    demo.launch(server_name="0.0.0.0", server_port=port)
 
 
 if __name__ == "__main__":

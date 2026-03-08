@@ -1,6 +1,6 @@
-openenv-core>=0.2.1
 pydantic>=2.0
 uvicorn>=0.24
 fastapi>=0.104
 python-dotenv>=1.0
 gradio>=4.0
+httpx>=0.25
