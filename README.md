@@ -8,6 +8,8 @@ Today's AI is trained to complete tasks. Tomorrow's AI must learn to **reason un
 
 Built on [OpenEnv 0.2.1](https://github.com/meta-pytorch/OpenEnv) | [OpenEnv Hackathon SF](https://cerebralvalley.ai/e/openenv-hackathon-sf)
 
+**Live Demo**: [HF Space](https://huggingface.co/spaces/naidu1212/hypernoa-astrum) | **Repo**: [GitHub](https://github.com/naidu1212/hypernoa-astrum)
+
 ---
 
 ## The Gap in Current AI Training
@@ -134,16 +136,32 @@ pip install -r requirements.txt
 python run_astrum_local.py
 ```
 
-OpenEnv server:
+### OpenEnv Server (HF Space compatible)
+
+```bash
+# Install the environment from HF Space
+pip install git+https://huggingface.co/spaces/naidu1212/hypernoa-astrum
+
+# Use as a client
+python -c "
+from astrum_env import AstrumEnv, AstrumAction
+with AstrumEnv(base_url='https://naidu1212-hypernoa-astrum.hf.space').sync() as env:
+    result = env.reset()
+    result = env.step(AstrumAction(action_type='allocate_resources', params={'stakeholder': 'workers', 'amount': 10, 'resource': 'budget'}))
+    print(f'Reward: {result.reward}')
+"
+```
+
+### Local server
 
 ```bash
 uvicorn hypernoa.astrum_env.server:app --host 0.0.0.0 --port 7860
 ```
 
-Gradio demo:
+### GRPO Training (H100)
 
 ```bash
-cd hf_space && python app.py
+python train_grpo.py --mode unsloth --model Qwen/Qwen2.5-0.5B-Instruct --episodes 50
 ```
 
 ---
@@ -151,19 +169,28 @@ cd hf_space && python app.py
 ## Project Structure
 
 ```
-├── hypernoa/
+├── hypernoa/                    # Core Python package
 │   └── astrum_env/
 │       ├── models.py            # Action & Observation schemas
 │       ├── config.py            # Scenario configuration
 │       ├── env.py               # Environment (OpenEnv compatible)
-│       ├── policies.py          # Reference policies
+│       ├── policies.py          # Reference policies (random, fairness, effectiveness, adaptive)
 │       ├── server.py            # OpenEnv HTTP API
 │       └── openenv.yaml
-├── hf_space/                    # Gradio demo
+├── hf_space/                    # HF Spaces deployment (OpenEnv 0.2.1)
+│   ├── server/                  # OpenEnv server (app.py, astrum_environment.py)
+│   ├── client.py                # EnvClient for remote access
+│   ├── models.py                # OpenEnv Action/Observation types
+│   ├── Dockerfile               # Docker image for HF Space
+│   └── README.md                # HF Space metadata
+├── tests/                       # 47 unit tests
+├── train.py                     # Multi-episode training with exploration annealing
+├── train_grpo.py                # GRPO training with Unsloth / TRL
+├── visualize.py                 # Training curve chart generator
 ├── colab/                       # Training notebook (Unsloth GRPO)
 ├── docs/                        # Overview + demo script
 ├── run_astrum_local.py
-├── requirements.txt
+├── pyproject.toml
 └── README.md
 ```
 
