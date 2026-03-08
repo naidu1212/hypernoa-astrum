@@ -11,10 +11,26 @@ import random
 from typing import Any, Dict, List, Optional, Tuple
 from uuid import uuid4
 
-from openenv.core.env_server.types import Action, Observation, State
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from ..config import AlignmentTrap, AstrumConfig, DEFAULT_CONFIG
-from ..models import AstrumAction, AstrumObservation
+try:
+    from openenv.core.env_server.types import Action, Observation, State
+except ImportError:
+    from pydantic import BaseModel, Field
+    class Action(BaseModel):
+        metadata: dict = Field(default_factory=dict)
+    class Observation(BaseModel):
+        done: bool = False
+        reward: float | None = None
+        metadata: dict = Field(default_factory=dict)
+    class State(BaseModel):
+        episode_id: str | None = None
+        step_count: int = 0
+
+from config import AlignmentTrap, AstrumConfig, DEFAULT_CONFIG
+from models import AstrumAction, AstrumObservation
 
 
 class AstrumEnvironment:

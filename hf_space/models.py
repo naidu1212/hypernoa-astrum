@@ -6,7 +6,16 @@ from typing import Any, Dict, List
 
 from pydantic import Field
 
-from openenv.core.env_server.types import Action, Observation
+try:
+    from openenv.core.env_server.types import Action, Observation
+except ImportError:
+    from pydantic import BaseModel
+    class Action(BaseModel):
+        metadata: dict = Field(default_factory=dict)
+    class Observation(BaseModel):
+        done: bool = False
+        reward: float | None = None
+        metadata: dict = Field(default_factory=dict)
 
 
 class AstrumAction(Action):
