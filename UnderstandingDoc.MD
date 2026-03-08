@@ -9,6 +9,8 @@ Deployed on HF Spaces	PASS	abnaidu-hypernoa-astrum.hf.space — /health returns 
 Training script using Unsloth or HF TRL	PASS	Ran train_grpo.py --mode trl with Qwen2.5-0.5B, 50 episodes, avg reward 25.071
 1-min YouTube demo video	YOU	Need to record and upload
 Submit via hackathon form	YOU	Submit here
+
+
 Problem Statements Addressed
 Statement	Fit
 3.1: World Modeling / Professional Tasks	Strong — persistent world state, multi-step adaptive dynamics, partially observable (hidden stakeholder values)
@@ -17,6 +19,7 @@ Partner Sub-Themes (eligible for $10K each, pick up to 2):
 
 Patronus AI: "Consumer Workflows with Schema Drift" — your environment has rules, policies, and stakeholder values that change mid-episode (value shift, crisis phases). This maps directly.
 Fleet AI: "Scalable Oversight" — your multi-stakeholder monitoring where the agent must balance competing groups fits the oversight framing.
+
 Judging Criteria Readiness
 Criteria	Weight	Ready?	What to show
 Environment Innovation	40%	YES	Alignment traps, 3 phases, 5 stakeholders, multi-objective reward
